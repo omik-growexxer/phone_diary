@@ -1,0 +1,38 @@
+<h1>{{heading}}</h1>
+<table class="table">
+    <thead>
+      <tr >
+        <th *ngFor="let col of cols">{{col}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of rows;index as i">
+        <!-- <td *ngFor="let col of cols">
+            <div *ngIf="col != 'Action'">{{row[col]}}</div>
+            <div *ngIf="col == 'Action'"><a (click)="removeRow(i)">Remove</a></div>
+        </td> -->
+        <td *ngFor="let col of cols">
+          <div *ngIf="col=='delete action'; else elseBlock1">
+            <a (click)="removeRow(i)">Delete</a>
+          </div>
+          <!-- for age -->
+          <ng-template #elseBlock1>
+            <div *ngIf="col==arr[0]; else elseBlock2">
+              {{row[col] | booltostring:arr}}
+            </div>
+          </ng-template>
+
+          <!-- for dob -->
+          <ng-template #elseBlock1>   
+            <div *ngIf="col==arr[4]; else elseBlock2">
+              {{row[col] }}
+            </div>
+          </ng-template>
+          
+          <ng-template #elseBlock2>
+            <div>{{row[col]}}</div>
+          </ng-template>
+        </td>
+      </tr>
+    </tbody>
+  </table>
